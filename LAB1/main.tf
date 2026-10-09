@@ -24,7 +24,19 @@ resource "random_string" "if" {
   upper   = false
   special = false
 }
-
+// Locally scoped variables
 locals {
   environment_prefix = "${var.application_name}-${var.environment_name}-${random_string.suffix.result}"
+}
+
+
+// module
+module "module_name_1" {
+  source  = "hashicorp/module/random"
+  version = "1.0.0"
+}
+
+module "module_name_2" {
+  source  = "hashicorp/module/random"
+  version = "1.0.0"
 }

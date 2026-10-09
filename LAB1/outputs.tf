@@ -63,3 +63,12 @@ output "release_name" {
 output "instance_count" {
   value = var.instance_count
 }
+
+//module outputs
+output "module_name_1_output" {
+  value = module.module_name_1.random_string
+}
+
+output "module_name_2_output" {
+  value = module.module_name_2.random_string
+}
