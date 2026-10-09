@@ -72,3 +72,9 @@ output "module_name_1_output" {
 output "module_name_2_output" {
   value = module.module_name_2.random_string
 }
+
+//local module outputs
+
+output "module_my_local_output" {
+  value = module.module_my_local.random_string
+}

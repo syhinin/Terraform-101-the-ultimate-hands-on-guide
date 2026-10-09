@@ -40,3 +40,8 @@ module "module_name_2" {
   source  = "hashicorp/module/random"
   version = "1.0.0"
 }
+
+module "module_my_local" {
+  source = "./modules/rando"
+  length = 34
+}
