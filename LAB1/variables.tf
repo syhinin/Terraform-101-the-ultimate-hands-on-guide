@@ -11,7 +11,18 @@ variable "api_key" {
   sensitive = true
 }
 
+variable "regions" {
+  type = list(string)
+}
+
+variable "regions_instance_count" {
+  type = map(string)
+}
+
 //Different types 
+variable "boolean_if" {
+  type = bool
+}
 variable "list_of_strings" {
   type = list(string)
 }
