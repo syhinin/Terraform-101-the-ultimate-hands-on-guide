@@ -1,0 +1,19 @@
+# Local provider/plugin cache
+**/.terraform/*
+
+# State files may contain sensitive values (e.g. api_key)
+*.tfstate
+*.tfstate.*
+**/terraform.tfstate.d/
+
+# Crash logs and override files
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI config
+.terraformrc
+terraform.rc
