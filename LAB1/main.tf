@@ -40,8 +40,25 @@ module "module_name_2" {
   source  = "hashicorp/module/random"
   version = "1.0.0"
 }
-
-module "module_my_local" {
+// Local module 
+module "module_my_local" { 
   source = "./modules/rando"
   length = 34
+}
+
+module "regionA" {
+  source = "./modules/regional-stamp"
+  region = "westus"
+  name   = "someRandomName_1"
+  mid_node_count = 4
+  max_node_count = 8
+}
+
+//same module for another region
+module "regionB" {
+  source = "./modules/regional-stamp"
+  region = "eastus"
+  name   = "someRandomName_2"
+  mid_node_count = 2
+  max_node_count = 6
 }
