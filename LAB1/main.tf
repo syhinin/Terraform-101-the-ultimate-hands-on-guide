@@ -27,6 +27,18 @@ resource "random_string" "if" {
 // Locally scoped variables
 locals {
   environment_prefix = "${var.application_name}-${var.environment_name}-${random_string.suffix.result}"
+
+  regional-stamps = [{
+    region         = "westus"
+    name           = "someRandomName_3"
+    mid_node_count = 4
+    max_node_count = 8
+    }, {
+    region         = "eastus"
+    name           = "someRandomName_4"
+    mid_node_count = 2
+    max_node_count = 6
+  }]
 }
 
 
@@ -41,24 +53,36 @@ module "module_name_2" {
   version = "1.0.0"
 }
 // Local module 
-module "module_my_local" { 
+module "module_my_local" {
   source = "./modules/rando"
   length = 34
 }
 
 module "regionA" {
-  source = "./modules/regional-stamp"
-  region = "westus"
-  name   = "someRandomName_1"
+  source         = "./modules/regional-stamp"
+  region         = "westus"
+  name           = "someRandomName_1"
   mid_node_count = 4
   max_node_count = 8
 }
 
 //same module for another region
 module "regionB" {
-  source = "./modules/regional-stamp"
-  region = "eastus"
-  name   = "someRandomName_2"
+  source         = "./modules/regional-stamp"
+  region         = "eastus"
+  name           = "someRandomName_2"
   mid_node_count = 2
   max_node_count = 6
 }
+
+//dynamically create regional-stamp modules based on the local.regional-stamps list 
+module "regional_stamps" {
+  source = "./modules/regional-stamp"
+  count  = length(local.regional-stamps)
+
+  region         = local.regional-stamps[count.index].region
+  name           = local.regional-stamps[count.index].name
+  mid_node_count = local.regional-stamps[count.index].mid_node_count
+  max_node_count = local.regional-stamps[count.index].max_node_count
+}
+

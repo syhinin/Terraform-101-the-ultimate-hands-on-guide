@@ -78,3 +78,11 @@ output "module_name_2_output" {
 output "module_my_local_output" {
   value = module.module_my_local.random_string
 }
+
+output "region_a" {
+  value = module.regional_stamps[0].name
+}
+
+output "region_b" {
+  value = module.regional_stamps[1].name
+}
