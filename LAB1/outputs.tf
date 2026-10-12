@@ -80,9 +80,9 @@ output "module_my_local_output" {
 }
 
 output "region_a" {
-  value = module.regional_stamps[0].name
+  value = module.regional_stamps["someRandomName_5"].name
 }
 
 output "region_b" {
-  value = module.regional_stamps[1].name
+  value = module.regional_stamps["someRandomName_6"].name
 }

@@ -28,17 +28,18 @@ resource "random_string" "if" {
 locals {
   environment_prefix = "${var.application_name}-${var.environment_name}-${random_string.suffix.result}"
 
-  regional-stamps = [{
-    region         = "westus"
-    name           = "someRandomName_3"
-    mid_node_count = 4
-    max_node_count = 8
-    }, {
-    region         = "eastus"
-    name           = "someRandomName_4"
-    mid_node_count = 2
-    max_node_count = 6
-  }]
+  regional_stamps = {
+    "someRandomName_5" = {
+      region         = "westus"
+      mid_node_count = 4
+      max_node_count = 8
+    },
+    "someRandomName_6" = {
+      region         = "eastus"
+      mid_node_count = 2
+      max_node_count = 6
+    }
+  }
 }
 
 
@@ -78,11 +79,12 @@ module "regionB" {
 //dynamically create regional-stamp modules based on the local.regional-stamps list 
 module "regional_stamps" {
   source = "./modules/regional-stamp"
-  count  = length(local.regional-stamps)
 
-  region         = local.regional-stamps[count.index].region
-  name           = local.regional-stamps[count.index].name
-  mid_node_count = local.regional-stamps[count.index].mid_node_count
-  max_node_count = local.regional-stamps[count.index].max_node_count
+  for_each = local.regional_stamps
+  
+  region         = each.value.region
+  name           = each.key
+  mid_node_count = each.value.mid_node_count
+  max_node_count = each.value.max_node_count
 }
 
