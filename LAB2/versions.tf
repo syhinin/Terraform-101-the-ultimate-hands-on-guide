@@ -1,0 +1,17 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>5.11.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.9.1"
+    }
+  }
+}
+
+# Configure the Microsoft Azure Provider it required
+provider "azurerm" {
+  features {}
+}

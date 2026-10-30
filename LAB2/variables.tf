@@ -1,13 +1,14 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~>5.11.0"
-    }
-  }
+variable "application_name" {
+  description = "The name of the application"
+  type        = string
 }
 
-# Configure the Microsoft Azure Provider it required
-provider "azurerm" {
-  features {}
+variable "environment_name" {
+  description = "The name of the environment"
+  type        = string
+}
+
+variable "primary_location" {
+  description = "The primary location for resources"
+  type        = string
 }
