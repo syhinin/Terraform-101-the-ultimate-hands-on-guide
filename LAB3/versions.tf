@@ -10,10 +10,6 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-my101app-prod"
-    storage_account_name = "st3d1tvatl16"  # storage account name for rg-my101app-prod
-    container_name       = "tfstate"
-    key                  = "observability-prod"      # Have to be unique for each environment and application
   }
 }
 
